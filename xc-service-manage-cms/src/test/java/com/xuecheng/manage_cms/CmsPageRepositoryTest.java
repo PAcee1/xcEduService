@@ -6,9 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -29,6 +27,22 @@ public class CmsPageRepositoryTest {
         int size = 10;
         Pageable pageable = PageRequest.of(0,10);
         Page<CmsPage> all = cmsPageRepository.findAll(pageable);
+        System.out.println(all);
+    }
+
+    @Test
+    public void testFindPageByParams(){
+        CmsPage cmsPage = new CmsPage();
+        cmsPage.setPageAliase("轮播");
+        // 设置匹配规则
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                // 意思是pageAliase这个字段，包含，即模糊查询
+                .withMatcher("pageAliase",ExampleMatcher.GenericPropertyMatchers.contains());
+        Example<CmsPage> example = Example.of(cmsPage,exampleMatcher);
+        int page = 0;
+        int size = 10;
+        Pageable pageable = PageRequest.of(0,10);
+        Page<CmsPage> all = cmsPageRepository.findAll(example,pageable);
         System.out.println(all);
     }
 }

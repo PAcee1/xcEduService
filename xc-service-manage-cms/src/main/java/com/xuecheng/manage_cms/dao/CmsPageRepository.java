@@ -9,4 +9,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @Version: v1.0
  */
 public interface CmsPageRepository extends MongoRepository<CmsPage,String> {
+
+    CmsPage findBySiteIdAndPageNameAndPageWebPath(String siteId,String pageName,String pageWebPath);
 }
