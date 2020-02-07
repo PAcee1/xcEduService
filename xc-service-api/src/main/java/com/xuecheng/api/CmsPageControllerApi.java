@@ -4,6 +4,7 @@ import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -47,4 +48,12 @@ public interface CmsPageControllerApi {
      */
     @ApiOperation("修改cmsPage")
     CmsPageResult update(String id,CmsPage cmsPage);
+
+    /**
+     * 根据ID删除CMSPage
+     * @param id
+     * @return
+     */
+    @ApiOperation("根据ID删除CmsPage")
+    ResponseResult delete(String id);
 }

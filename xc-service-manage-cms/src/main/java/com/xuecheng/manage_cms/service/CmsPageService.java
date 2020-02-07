@@ -2,10 +2,13 @@ package com.xuecheng.manage_cms.service;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
+import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +42,10 @@ public class CmsPageService {
             queryPageRequest = new QueryPageRequest();
         }
 
-        // 添加查询条件 对于别名需要模糊查询，而ID使用精准查询就不用设置
+        // 添加查询条件 对于别名和名称需要模糊查询，而ID使用精准查询就不用设置
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-                .withMatcher("pageAliase",ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("pageAliase",ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("pageName",ExampleMatcher.GenericPropertyMatchers.contains());
         CmsPage cmsPage = new CmsPage();
         if(StringUtils.isNotBlank(queryPageRequest.getSiteId())){
             cmsPage.setSiteId(queryPageRequest.getSiteId());
@@ -51,6 +55,12 @@ public class CmsPageService {
         }
         if(StringUtils.isNotBlank(queryPageRequest.getPageAliase())){
             cmsPage.setPageAliase(queryPageRequest.getPageAliase());
+        }
+        if(StringUtils.isNotBlank(queryPageRequest.getPageName())){
+            cmsPage.setPageName(queryPageRequest.getPageName());
+        }
+        if(StringUtils.isNotBlank(queryPageRequest.getPageType())){
+            cmsPage.setPageType(queryPageRequest.getPageType());
         }
         // 创建Example
         Example<CmsPage> example = Example.of(cmsPage,exampleMatcher);
@@ -84,15 +94,15 @@ public class CmsPageService {
         // 唯一性约束：pageName，siteId，pageWebPath
         CmsPage cmsPage1 = cmsPageRepository.findBySiteIdAndPageNameAndPageWebPath(
                 cmsPage.getSiteId(), cmsPage.getPageName(), cmsPage.getPageWebPath());
-        if(cmsPage1 == null){
-            // 不存在，才进行添加
-            // 并且设置pageId自动生成
-            cmsPage.setPageId(null);
-            CmsPage cmsPageResult = cmsPageRepository.save(cmsPage);
-            return new CmsPageResult(CommonCode.SUCCESS,cmsPageResult);
+        if(cmsPage1 != null){
+            // 如果存在，则抛出自定义异常，页面已存在异常
+            ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTSNAME);
         }
-        // 存在，返回错误
-        return new CmsPageResult(CommonCode.FAIL,null);
+        // 不存在，才进行添加
+        // 并且设置pageId自动生成
+        cmsPage.setPageId(null);
+        CmsPage cmsPageResult = cmsPageRepository.save(cmsPage);
+        return new CmsPageResult(CommonCode.SUCCESS,cmsPageResult);
     }
 
     /**
@@ -119,19 +129,37 @@ public class CmsPageService {
         // 首先判断此id是否存在
         CmsPage page = this.findById(pageId);
         // 存在才修改
-        if(page != null){
-            page.setTemplateId(cmsPage.getTemplateId());
-            page.setSiteId(cmsPage.getSiteId());
-            page.setPageAliase(cmsPage.getPageAliase());
-            page.setPageName(cmsPage.getPageName());
-            page.setPageWebPath(cmsPage.getPageWebPath());
-            page.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
-            // 更新
-            CmsPage save = cmsPageRepository.save(page);
-            if(save != null){
-                return new CmsPageResult(CommonCode.SUCCESS,save);
-            }
+        if(page == null){
+            // 不存在抛出异常
+            ExceptionCast.cast(CmsCode.CMS_FINDPAGE_NOTEXIST);
         }
-        return new CmsPageResult(CommonCode.FAIL,null);
+        page.setTemplateId(cmsPage.getTemplateId());
+        page.setSiteId(cmsPage.getSiteId());
+        page.setPageAliase(cmsPage.getPageAliase());
+        page.setPageName(cmsPage.getPageName());
+        page.setPageWebPath(cmsPage.getPageWebPath());
+        page.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+        // 更新
+        CmsPage save = cmsPageRepository.save(page);
+        if(save == null){
+            // 保存失败抛出异常
+            ExceptionCast.cast(CmsCode.CMS_SAVEPAGE_ERROR);
+        }
+        return new CmsPageResult(CommonCode.SUCCESS,save);
+    }
+
+    /**
+     * 根据id删除页面
+     * @param id
+     * @return
+     */
+    public ResponseResult delete(String id) {
+        // 首先需要判断此id是否存在
+        CmsPage cmsPage = this.findById(id);
+        if(cmsPage == null){
+            ExceptionCast.cast(CmsCode.CMS_FINDPAGE_NOTEXIST);
+        }
+        cmsPageRepository.deleteById(id);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }
