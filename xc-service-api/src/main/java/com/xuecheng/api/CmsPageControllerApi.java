@@ -5,6 +5,7 @@ import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
  * @Data: 2020/2/4 11:22
  * @Version: v1.0
  */
+@Api(value = "cms页面管理接口",description = "cms页面管理，查询接口")
 public interface CmsPageControllerApi {
 
     /**
