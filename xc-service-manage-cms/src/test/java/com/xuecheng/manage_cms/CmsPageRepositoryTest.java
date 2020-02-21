@@ -2,6 +2,7 @@ package com.xuecheng.manage_cms;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
+import com.xuecheng.manage_cms.service.CmsPageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class CmsPageRepositoryTest {
 
     @Autowired
     private CmsPageRepository cmsPageRepository;
+    @Autowired
+    private CmsPageService cmsPageService;
 
     @Test
     public void testFindPage(){
@@ -44,5 +47,11 @@ public class CmsPageRepositoryTest {
         Pageable pageable = PageRequest.of(0,10);
         Page<CmsPage> all = cmsPageRepository.findAll(example,pageable);
         System.out.println(all);
+    }
+
+    @Test
+    public void getPageHtml(){
+        String pageHtml = cmsPageService.getPageHtml("5e4fd031392c022514c5122e");
+        System.out.println(pageHtml);
     }
 }
