@@ -1,0 +1,8 @@
+server:
+  port: 44000
+spring:
+  application:
+    name: test-rabbitmq-provider
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    virtual-host: /
