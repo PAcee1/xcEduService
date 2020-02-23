@@ -4,6 +4,7 @@ import com.xuecheng.api.CmsPageControllerApi;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.CmsPageService;
@@ -59,5 +60,12 @@ public class CmsPageController implements CmsPageControllerApi {
     @DeleteMapping("/delete/{id}")
     public ResponseResult delete(@PathVariable String id) {
         return cmsPageService.delete(id);
+    }
+
+    @Override
+    @PostMapping("/publishPage/{pageId}")
+    public ResponseResult publishPage(@PathVariable String pageId) {
+        cmsPageService.publishPage(pageId);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }
