@@ -1,6 +1,6 @@
 package com.xuecheng.manage_cms.controller;
 
-import com.xuecheng.api.CmsPageControllerApi;
+import com.xuecheng.api.cms.CmsPageControllerApi;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;

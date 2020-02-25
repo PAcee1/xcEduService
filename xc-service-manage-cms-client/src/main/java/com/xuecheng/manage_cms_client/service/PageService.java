@@ -73,6 +73,12 @@ public class PageService {
         inputStream.close();
     }
 
+    /**
+     * 根据fileId向GridFS查询文件，获取此文件的输入流
+     * 为后面将文件拷贝到服务器上做准备
+     * @param fileId
+     * @return
+     */
     public InputStream getFileById(String fileId) {
         // 首先根据id获取File
         GridFSFile gridFSFile = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(fileId)));
@@ -89,6 +95,11 @@ public class PageService {
         return null;
     }
 
+    /**
+     * 根据id获取CmsSIte
+     * @param siteId
+     * @return
+     */
     public CmsSite getCmsSiteById(String siteId) {
         Optional<CmsSite> optional = cmsSiteRepository.findById(siteId);
         if(optional.isPresent()){
@@ -97,6 +108,11 @@ public class PageService {
         return null;
     }
 
+    /**
+     * 根据id获取CmsPage
+     * @param pageId
+     * @return
+     */
     public CmsPage getCmsPageById(String pageId){
         Optional<CmsPage> optional = cmsPageRepository.findById(pageId);
         if(optional.isPresent()){

@@ -1,4 +1,4 @@
-package com.xuecheng.api;
+package com.xuecheng.api.cms;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
