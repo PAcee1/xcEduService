@@ -38,6 +38,8 @@
     <logger name="org.apache.ibatis.cache.decorators.LoggingCache" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
+    <logger name="com.xuecheng.manage_cms_client.dao" level="DEBUG"/>
+
     <logger name="org.springframework.boot" level="DEBUG"/>
     <root level="info">
         <!--<appender-ref ref="ASYNC"/>-->
