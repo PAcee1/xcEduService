@@ -3,6 +3,7 @@ package com.xuecheng.manage_course.controller;
 import com.xuecheng.api.course.CourseControllerApi;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
+import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -83,6 +84,29 @@ public class CourseController implements CourseControllerApi {
     public ResponseResult updateCourseMarket(@RequestBody CourseMarket courseMarket) {
         courseService.updateCourseMarket(courseMarket);
         return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    @Override
+    @PostMapping("/coursepic/add")
+    public ResponseResult addCoursePic(String courseId, String pic) {
+        courseService.addCoursePic(courseId,pic);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    @Override
+    @GetMapping("/coursepic/get/{courseId}")
+    public CoursePic findCourseId(@PathVariable String courseId) {
+        return courseService.findCourseId(courseId);
+    }
+
+    @Override
+    @DeleteMapping("/coursepic/delete")
+    public ResponseResult deleteCoursePic(String courseId) {
+        long result = courseService.deleteCoursePic(courseId);
+        if(result > 0){
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
     }
 
 }

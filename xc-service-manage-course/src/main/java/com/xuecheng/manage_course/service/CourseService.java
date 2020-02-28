@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.constant.CourseConstant;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
+import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -16,6 +17,7 @@ import com.xuecheng.manage_course.dao.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,8 @@ public class CourseService {
     private TeachplanRepository teachplanRepository;
     @Autowired
     private CourseMarketRepository courseMarketRepository;
+    @Autowired
+    private CoursePicRepository coursePicRepository;
 
     /**
      * 查询课程列表，分页查询
@@ -117,6 +121,42 @@ public class CourseService {
     }
 
     /**
+     * 保存课程图片
+     * @param courseId
+     * @param pic
+     */
+    public void addCoursePic(String courseId, String pic) {
+        CoursePic coursePic = new CoursePic();
+        coursePic.setCourseid(courseId);
+        coursePic.setPic(pic);
+        coursePicRepository.save(coursePic);
+    }
+
+    /**
+     * 查询图片
+     * @param courseId
+     * @return
+     */
+    public CoursePic findCourseId(String courseId) {
+        Optional<CoursePic> optional = coursePicRepository.findById(courseId);
+        if(!optional.isPresent()){
+            return  null;
+        }
+        return optional.get();
+    }
+
+    /**
+     * 删除课程图片
+     * @param courseId
+     * @return
+     */
+    @Transactional
+    public long deleteCoursePic(String courseId) {
+        long result = coursePicRepository.deleteByCourseid(courseId);
+        return result;
+    }
+
+    /**
      * 根据id查询课程计划树
      * @param courseId
      * @return
@@ -193,5 +233,6 @@ public class CourseService {
         Teachplan teachplan = teachplanList.get(0);
         return teachplan.getId();
     }
+
 
 }
