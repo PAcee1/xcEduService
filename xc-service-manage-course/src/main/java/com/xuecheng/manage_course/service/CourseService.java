@@ -8,6 +8,7 @@ import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
+import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import com.xuecheng.framework.exception.ExceptionCast;
@@ -137,7 +138,7 @@ public class CourseService {
      * @param courseId
      * @return
      */
-    public CoursePic findCourseId(String courseId) {
+    public CoursePic findCoursePic(String courseId) {
         Optional<CoursePic> optional = coursePicRepository.findById(courseId);
         if(!optional.isPresent()){
             return  null;
@@ -203,6 +204,37 @@ public class CourseService {
     }
 
     /**
+     * 查询课程视图
+     * @param id
+     * @return
+     */
+    public CourseView findCourseView(String id) {
+        // 根据id查询课程基础信息
+        Optional<CourseBase> optional = courseBaseRepository.findById(id);
+        if(!optional.isPresent()){
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+        CourseBase courseBase = optional.get();
+
+        // 查询课程图片
+        CoursePic coursePic = findCoursePic(id);
+
+        // 查询课程计划
+        TeachplanNode teachplanNode = findTeachListById(id);
+
+        // 查询课程营销
+        CourseMarket courseMarket = getCourseMarketById(id);
+
+        CourseView courseView = new CourseView();
+        courseView.setCourseBase(courseBase);
+        courseView.setCourseMarket(courseMarket);
+        courseView.setCoursePic(coursePic);
+        courseView.setTeachplanNode(teachplanNode);
+        return courseView;
+    }
+
+
+    /**
      * 获取根节点，如果是新课，那么根节点不存在，需要创建根节点
      * @param courseid
      * @return
@@ -233,6 +265,5 @@ public class CourseService {
         Teachplan teachplan = teachplanList.get(0);
         return teachplan.getId();
     }
-
 
 }

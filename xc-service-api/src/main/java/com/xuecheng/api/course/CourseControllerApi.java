@@ -5,6 +5,7 @@ import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
+import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import com.xuecheng.framework.domain.course.response.AddCourseResult;
@@ -51,8 +52,11 @@ public interface CourseControllerApi {
                                 String pic);
 
     @ApiOperation("查询课程图片")
-    CoursePic findCourseId(String courseId);
+    CoursePic findCoursePic(String courseId);
 
     @ApiOperation("删除课程图片")
     ResponseResult deleteCoursePic(String courseId);
+
+    @ApiOperation("课程视图查询")
+    CourseView findCourseView(String id);
 }

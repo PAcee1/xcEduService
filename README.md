@@ -79,3 +79,22 @@
 - 业务层：Spring IOC、Aop事务控制、Spring Task任务调度、Feign、Ribbon、Spring AMQP、Spring Data Redis等
 - 控制层：Spring MVC、FastJSON、RestTemplate、Spring Security Oauth2+JWT等
 - 微服务治理：Eureka、Zuul、Hystrix、Spring Cloud Config等
+
+## 项目搭建启动
+
+### 所需环境
+
+Java，Mysql，MongoDB，FastDFS
+
+MongoDB：
+
+1. xc-resources\mongodb下的xc_cms导入到db中
+2. db中创建xc_fs DataBase，不需要创建表
+
+Mysql：
+
+1. 执行xc-resources\mysql下的xc_course.sql
+
+FastDFS：
+
+具体搭建查看笔记

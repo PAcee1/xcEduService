@@ -1,0 +1,10 @@
+server:
+ port: 50101
+eureka:
+  client:
+    fetch-registry: true # 单机关闭
+    register-with-eureka: true # 单机关闭
+    service-url:
+      defaultZone: http://eureka02:50102/eureka/
+  instance:
+    hostname: eureka01

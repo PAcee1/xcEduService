@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: eureka01
+  application:
+    name: xc-govern-center
+eureka:
+  server:
+    enable-self-preservation: false # 开发关闭自我保护
+    eviction-interval-timer-in-ms: 60000 # 服务注册表清理时间
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

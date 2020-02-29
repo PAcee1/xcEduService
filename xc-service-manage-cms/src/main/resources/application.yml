@@ -13,4 +13,11 @@ spring:
     username: guest
     password: guest
     virtualHost: /
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:50101/eureka/,http://localhost:50102/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 127.0.0.1

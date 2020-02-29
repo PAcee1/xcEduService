@@ -35,6 +35,14 @@ public class GridFsTemplateTest {
     private GridFSBucket gridFSBucket;
 
     @Test
+    public void testSave2() throws FileNotFoundException {
+        File file = new File("D:\\tmp\\course.ftl");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectId objectId = gridFsTemplate.store(fileInputStream, "course.ftl");
+        System.out.println(objectId);
+    }
+
+    @Test
     public void testSave() throws FileNotFoundException {
         File file = new File("D:\\tmp\\index_banner.ftl");
         FileInputStream fileInputStream = new FileInputStream(file);
