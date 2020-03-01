@@ -27,3 +27,16 @@ eureka:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     ip-address: 127.0.0.1
+# 设置feign调用超时时间
+ribbon:
+  ConnectTimeout: 10000 # 连接请求
+  ReadTimeout: 20000 # 调用请求
+
+course-publish:
+  siteId: 5e5b6b8aa6a4ac40046c05ee
+  templateId: 5e5a72e4a6a4ac414c52ed7a
+  previewUrl: http://www.xuecheng.com/cms/preview/
+  pageWebPath: /course/detail/
+  pagePhysicalPath: /course/detail/
+  dataUrlPre: http://localhost:31200/course/courseview/
+

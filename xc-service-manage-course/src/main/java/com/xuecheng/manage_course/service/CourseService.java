@@ -44,6 +44,7 @@ public class CourseService {
     @Autowired
     private CoursePicRepository coursePicRepository;
 
+
     /**
      * 查询课程列表，分页查询
      * @param page

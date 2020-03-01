@@ -66,4 +66,12 @@ public interface CmsPageControllerApi {
      */
     @ApiOperation("页面发布")
     ResponseResult publishPage(String pageId);
+
+    /**
+     * 添加Page，提供给课程服务调用，如果已经有了则更新
+     * @param cmsPage
+     * @return
+     */
+    @ApiOperation("添加Page，提供给课程服务调用，如果已经有了则更新")
+    CmsPageResult save(CmsPage cmsPage);
 }

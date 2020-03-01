@@ -25,6 +25,8 @@ public class CmsPagePreviewController extends BaseController {
     public void preview(@PathVariable String pageId) throws IOException {
         String pageHtml = cmsPageService.getPageHtml(pageId);
         // 输出页面
+        // 必须设置请求头为html, nginx才能解析ssi，否则nginx不解析
+        response.setHeader("Content-type","text/html;charset=utf-8");
         ServletOutputStream outputStream = response.getOutputStream();
         outputStream.write(pageHtml.getBytes("utf-8"));
     }

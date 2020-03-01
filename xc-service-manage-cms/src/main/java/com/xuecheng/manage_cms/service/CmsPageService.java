@@ -199,6 +199,26 @@ public class CmsPageService {
     }
 
     /**
+     * 添加Page，提供给课程服务调用，如果已经有了则更新
+     * @param cmsPage
+     * @return
+     */
+    public CmsPageResult save(CmsPage cmsPage) {
+        // 查询CmsPage
+        CmsPage cmsPage1 = cmsPageRepository.findBySiteIdAndPageNameAndPageWebPath(
+                cmsPage.getSiteId(), cmsPage.getPageName(), cmsPage.getPageWebPath());
+
+        // 判断是否存在
+        if(cmsPage1 != null){ // 已经存在，则更新
+            CmsPageResult cmsPageResult = update(cmsPage1.getPageId(), cmsPage);
+            return cmsPageResult;
+        }
+        // 不存在，新增
+        CmsPageResult cmsPageResult = add(cmsPage);
+        return cmsPageResult;
+    }
+
+    /**
      * 页面静态化
      * @param pageId
      * @return
@@ -387,4 +407,5 @@ public class CmsPageService {
         Map body = forEntity.getBody();
         return body;
     }
+
 }

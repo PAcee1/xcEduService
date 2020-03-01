@@ -68,4 +68,10 @@ public class CmsPageController implements CmsPageControllerApi {
         cmsPageService.publishPage(pageId);
         return new ResponseResult(CommonCode.SUCCESS);
     }
+
+    @Override
+    @PostMapping("/save")
+    public CmsPageResult save(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.save(cmsPage);
+    }
 }
