@@ -3,6 +3,7 @@ package com.xuecheng.api.cms;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPublishPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
@@ -74,4 +75,12 @@ public interface CmsPageControllerApi {
      */
     @ApiOperation("添加Page，提供给课程服务调用，如果已经有了则更新")
     CmsPageResult save(CmsPage cmsPage);
+
+    /**
+     * 一键发布页面，主要为其他服务提供
+     * @param cmsPage
+     * @return
+     */
+    @ApiOperation("一键发布页面，主要为其他服务提供")
+    CmsPublishPageResult publishPageQuick(CmsPage cmsPage);
 }

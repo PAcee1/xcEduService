@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author: Pace
@@ -25,5 +26,17 @@ public class CmsSiteService {
     public List<CmsSite> getCmsSiteList() {
         List<CmsSite> cmsSiteList = cmsSiteRepository.findAll();
         return cmsSiteList;
+    }
+
+    /**
+     * 根据id查询站点
+     * @param siteId
+     * @return
+     */
+    public CmsSite getCmsSiteById(String siteId) {
+        Optional<CmsSite> optional = cmsSiteRepository.findById(siteId);
+        if(optional.isPresent())
+            return optional.get();
+        return null;
     }
 }

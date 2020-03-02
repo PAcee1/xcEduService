@@ -5,6 +5,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.xuecheng.framework.domain.cms.CmsPage;
+import com.xuecheng.framework.domain.cms.CmsSite;
 import com.xuecheng.framework.domain.cms.CmsTemplate;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
@@ -53,6 +54,7 @@ public class CmsPageService {
     private CmsPageRepository cmsPageRepository;
     @Autowired
     private CmsTemplateRepository cmsTemplateRepository;
+
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
@@ -61,6 +63,9 @@ public class CmsPageService {
     private GridFSBucket gridFSBucket;
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private CmsSiteService cmsSiteService;
 
     /**
      * 分页查询页面列表
@@ -265,6 +270,37 @@ public class CmsPageService {
 
         // 3、发送消息到MQ
         sendPublishPageMsg(pageId);
+    }
+
+
+    /**
+     * 页面一键发布，主要提供给其他服务调用
+     * @param cmsPage
+     * @return
+     */
+    public String publishPageQuick(CmsPage cmsPage) {
+        /**  一、根据传来的页面信息新增或者修改  **/
+        CmsPageResult cmsPageResult = save(cmsPage);
+        if(!cmsPageResult.isSuccess()){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        CmsPage newCmsPage = cmsPageResult.getCmsPage();
+        String pageId = newCmsPage.getPageId();
+        String siteId = newCmsPage.getSiteId();
+
+        /**  二、页面发布  **/
+        publishPage(pageId);
+
+        /**  三、拼接页面的URL **/
+        // 页面URL = 站点域名 + 站点WebPath + 页面WebPath + 页面名称
+        // 查询站点
+        CmsSite cmsSite = cmsSiteService.getCmsSiteById(siteId);
+        String siteDomain = cmsSite.getSiteDomain(); // 站点域名
+        String siteWebPath = cmsSite.getSiteWebPath(); // 站点WebPath
+        String pageWebPath = newCmsPage.getPageWebPath(); // 页面WebPath
+        String pageName = newCmsPage.getPageName(); // 页面名称
+        String pageUrl = siteDomain + siteWebPath + pageWebPath + pageName;
+        return pageUrl;
     }
 
     /**

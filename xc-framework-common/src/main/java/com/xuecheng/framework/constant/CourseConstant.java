@@ -9,6 +9,7 @@ public interface CourseConstant {
 
     /** 课程的 发布状态 **/
     public static final String COURSEBASE_STATUS_NO = "202001"; // 未发布
+    public static final String COURSEBASE_STATUS_YES = "202002"; // 发布
 
     /** 课程计划发布状态 **/
     public static final String TEACHPLAN_STATUS_NO = "0"; // 未发布

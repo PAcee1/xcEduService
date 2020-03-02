@@ -28,4 +28,11 @@ public class CoursePageController implements CoursePageControllerApi {
         String previewUrl = coursePageService.coursePreview(courseId);
         return new CoursePublishResult(CommonCode.SUCCESS,previewUrl);
     }
+
+    @Override
+    @PostMapping("/publish/{id}")
+    public CoursePublishResult coursePublish(@PathVariable("id") String courseId) {
+        String previewUrl = coursePageService.publishPageQuick(courseId);
+        return new CoursePublishResult(CommonCode.SUCCESS,previewUrl);
+    }
 }
