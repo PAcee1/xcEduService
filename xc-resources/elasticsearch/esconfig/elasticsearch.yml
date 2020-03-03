@@ -1,0 +1,35 @@
+## 集群基础配置
+# 集群名称
+cluster.name: xuecheng
+# 节点名称
+node.name: xc_node_1
+# 本机的ip地址
+network.host: 0.0.0.0
+# http端口
+http.port: 9200
+# tcp端口
+transport.tcp.port: 9300
+
+# 集群中主节点和数据节点设置
+node.master: true
+node.data: true
+
+# 集群内自动发现节点的ip端口，即设置子节点
+#discovery.zen.ping.unicast.hosts: ["0.0.0.0:9300", "0.0.0.0:9301"]
+# 集群最大主节点个数 N/2+1，N为节点数量，避免脑裂问题
+#discovery.zen.minimum_master_nodes: 2
+
+# 协调节点，具体百度，功能强大，但是个人觉得不适合给主节点使用
+#node.ingest: true
+# 内存锁定，某块内存只能给此进程使用
+#bootstrap.memory_lock: false
+#node.max_local_storage_nodes: 2
+
+# 数据日志存放位置
+path.data: D:\Major\ElasticSearch\es-6.2.1-01\data
+path.logs: D:\Major\ElasticSearch\es-6.2.1-01\logs
+
+# 跨域设置
+http.cors.enabled: true
+http.cors.allow-origin: /.*/
+

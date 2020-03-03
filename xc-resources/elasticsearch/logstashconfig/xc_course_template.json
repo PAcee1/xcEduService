@@ -1,0 +1,85 @@
+{
+   "mappings" : {
+      "doc" : {
+         "properties" : {
+            "charge" : {
+               "type" : "keyword"
+            },
+            "description" : {
+               "analyzer" : "ik_max_word",
+               "search_analyzer" : "ik_smart",
+               "type" : "text"
+            },
+            "end_time" : {
+               "format" : "yyyy-MM-dd HH:mm:ss",
+               "type" : "date"
+            },
+            "expires" : {
+               "format" : "yyyy-MM-dd HH:mm:ss",
+               "type" : "date"
+            },
+            "grade" : {
+               "type" : "keyword"
+            },
+            "id" : {
+               "type" : "keyword"
+            },
+            "mt" : {
+               "type" : "keyword"
+            },
+            "name" : {
+               "analyzer" : "ik_max_word",
+               "search_analyzer" : "ik_smart",
+               "type" : "text"
+            },
+            "pic" : {
+               "index" : false,
+               "type" : "keyword"
+            },
+            "price" : {
+               "type" : "float"
+            },
+            "price_old" : {
+               "type" : "float"
+            },
+            "pub_time" : {
+               "format" : "yyyy-MM-dd HH:mm:ss",
+               "type" : "date"
+            },
+            "qq" : {
+               "index" : false,
+               "type" : "keyword"
+            },
+            "st" : {
+               "type" : "keyword"
+            },
+            "start_time" : {
+               "format" : "yyyy-MM-dd HH:mm:ss",
+               "type" : "date"
+            },
+            "status" : {
+               "type" : "keyword"
+            },
+            "studymodel" : {
+               "type" : "keyword"
+            },
+            "teachmode" : {
+               "type" : "keyword"
+            },
+            "teachplan" : {
+               "analyzer" : "ik_max_word",
+               "search_analyzer" : "ik_smart",
+               "type" : "text"
+            },
+            "users" : {
+               "index" : false,
+               "type" : "text"
+            },
+            "valid" : {
+               "type" : "keyword"
+            }
+         }
+      }
+   },
+   "template" : "xc_course"
+}
