@@ -108,10 +108,10 @@ public class CourseService {
      */
     public CourseMarket getCourseMarketById(String courseId) {
         Optional<CourseMarket> optional = courseMarketRepository.findById(courseId);
-        if(!optional.isPresent()){
-            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        if(optional.isPresent()){
+            return optional.get();
         }
-        return optional.get();
+        return null;
     }
 
     /**

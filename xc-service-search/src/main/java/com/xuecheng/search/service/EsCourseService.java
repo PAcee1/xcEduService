@@ -111,13 +111,15 @@ public class EsCourseService {
         searchSourceBuilder.query(boolQueryBuilder);
 
         // 分页设置
-        searchSourceBuilder.from(page < 1 ? 1 : page);
+        // 设置起始下标
+        int from = (page < 1 ? 0 : page-1) * size;
+        searchSourceBuilder.from(from);
         searchSourceBuilder.size(size < 0 ? 20 : size);
 
         // 设置高亮字段
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<font class='eslight'>");
-        highlightBuilder.postTags("<font/>");
+        highlightBuilder.postTags("</font>");
         highlightBuilder.fields().add(new HighlightBuilder.Field("name"));
         searchSourceBuilder.highlighter(highlightBuilder);
 
@@ -142,6 +144,9 @@ public class EsCourseService {
             CoursePub coursePub = new CoursePub();
             //取出source
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            // 取出id
+            String id = (String) sourceAsMap.get("id");
+            coursePub.setId(id);
             //取出名称
             String name = (String) sourceAsMap.get("name");
             //取出高亮字段内容
