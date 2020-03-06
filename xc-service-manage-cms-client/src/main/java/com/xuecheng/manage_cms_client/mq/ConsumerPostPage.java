@@ -21,8 +21,19 @@ public class ConsumerPostPage {
     @Autowired
     private PageService pageService;
 
-    @RabbitListener(queues = {"${xuecheng.mq.queue}"})
-    public void postPage(String msg) throws IOException {
+    @RabbitListener(queues = {"${xuecheng.mq.queue1}"})
+    public void postPage1(String msg) throws IOException {
+        // 将消息解析
+        Map map = JSON.parseObject(msg, Map.class);
+        // 获取pageId
+        String pageId= (String) map.get("pageId");
+
+        // 执行Service方法
+        pageService.savePageToServerPath(pageId);
+    }
+
+    @RabbitListener(queues = {"${xuecheng.mq.queue3}"})
+    public void postPage3(String msg) throws IOException {
         // 将消息解析
         Map map = JSON.parseObject(msg, Map.class);
         // 获取pageId

@@ -10,13 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xc-service-manage-media</artifactId>
+    <artifactId>xc-service-manage-media-processor</artifactId>
     <dependencies>
-        <!-- 导入Eureka客户端的依赖 -->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>-->
+
         <dependency>
             <groupId>com.xuecheng</groupId>
             <artifactId>xc-service-api</artifactId>
@@ -36,10 +32,6 @@
             <groupId>com.xuecheng</groupId>
             <artifactId>xc-framework-common</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>

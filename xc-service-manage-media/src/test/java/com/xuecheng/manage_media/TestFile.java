@@ -101,4 +101,15 @@ public class TestFile {
         }
         writeIO.close();
     }
+
+    @Test
+    public void deleteChunk(){
+        String chunkFolderPath = "D:\\Github\\xcEdu\\xcEduVideos\\5\\f\\chunk";
+        File file = new File(chunkFolderPath);
+        File[] files = file.listFiles();
+        for(File delFile : files){
+            delFile.delete();
+        }
+        file.delete();
+    }
 }
