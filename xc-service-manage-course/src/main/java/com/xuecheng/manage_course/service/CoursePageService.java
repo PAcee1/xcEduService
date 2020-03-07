@@ -5,10 +5,7 @@ import com.xuecheng.framework.constant.CourseConstant;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.CmsPublishPageResult;
-import com.xuecheng.framework.domain.course.CourseBase;
-import com.xuecheng.framework.domain.course.CourseMarket;
-import com.xuecheng.framework.domain.course.CoursePic;
-import com.xuecheng.framework.domain.course.CoursePub;
+import com.xuecheng.framework.domain.course.*;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
@@ -21,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -57,6 +56,10 @@ public class CoursePageService {
     private CoursePicRepository coursePicRepository;
     @Autowired
     private CoursePubRepository coursePubRepository;
+    @Autowired
+    private TeachplanMediaRepository teachplanMediaRepository;
+    @Autowired
+    private TeachplanMediaPubRepository teachplanMediaPubRepository;
 
     /**
      * 课程预览
@@ -102,7 +105,33 @@ public class CoursePageService {
         CoursePub coursePub = createCoursePub(courseId);
         CoursePub newcoursePub = saveCoursePub(courseId,coursePub);
 
+        // 五、发布后，保存课程计划到pub表，方便Logstash同步到ES上
+        saveTeachplanMediaPub(courseId);
+
         return pageUrl;
+    }
+
+    /**
+     * 发布后，保存课程计划到pub表，方便Logstash同步到ES上
+     * @param courseId
+     */
+    private void saveTeachplanMediaPub(String courseId) {
+        // 删除原来的信息
+        teachplanMediaPubRepository.deleteByCourseId(courseId);
+
+        // 查询课程计划媒体表中的数据
+        List<TeachplanMedia> teachplanMediaList = teachplanMediaRepository.findByCourseId(courseId);
+
+        // 保存到pub表
+        List<TeachplanMediaPub> teachplanMediaPubList = new ArrayList<>();
+        for(TeachplanMedia teachplanMedia : teachplanMediaList){
+            TeachplanMediaPub teachplanMediaPub = new TeachplanMediaPub();
+            BeanUtils.copyProperties(teachplanMedia,teachplanMediaPub);
+            // 设置时间戳
+            teachplanMediaPub.setTimestamp(new Date());
+            teachplanMediaPubList.add(teachplanMediaPub);
+        }
+        teachplanMediaPubRepository.saveAll(teachplanMediaPubList);
     }
 
     /**

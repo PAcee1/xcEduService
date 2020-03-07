@@ -3,14 +3,12 @@ package com.xuecheng.manage_course.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.constant.CourseConstant;
-import com.xuecheng.framework.domain.course.CourseBase;
-import com.xuecheng.framework.domain.course.CourseMarket;
-import com.xuecheng.framework.domain.course.CoursePic;
-import com.xuecheng.framework.domain.course.Teachplan;
+import com.xuecheng.framework.domain.course.*;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
+import com.xuecheng.framework.domain.course.response.CourseCode;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResult;
@@ -43,6 +41,8 @@ public class CourseService {
     private CourseMarketRepository courseMarketRepository;
     @Autowired
     private CoursePicRepository coursePicRepository;
+    @Autowired
+    private TeachplanMediaRepository teachplanMediaRepository;
 
 
     /**
@@ -234,6 +234,42 @@ public class CourseService {
         return courseView;
     }
 
+    /**
+     * 保存课程计划关联的视频
+     * @param teachplanMedia
+     */
+    public void saveTeachplanMedia(TeachplanMedia teachplanMedia) {
+        // 1.判断参数
+        if(teachplanMedia == null){
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+
+        // 2.取出课程计划，判断是否为第三级目录
+        Optional<Teachplan> optional = teachplanRepository.findById(teachplanMedia.getTeachplanId());
+        if(!optional.isPresent()){
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+        Teachplan teachplan = optional.get();
+        if(!teachplan.getGrade().equals("3")){
+            ExceptionCast.cast(CourseCode.COURSE_MEDIA_TEACHPLAN_ILLEGAL_GRADE);
+        }
+
+        // 3.取出TeachPlanMedia对象，新增或修改
+        TeachplanMedia teachplanMediaNew = new TeachplanMedia();
+        Optional<TeachplanMedia> optional1 = teachplanMediaRepository.findById(teachplanMedia.getTeachplanId());
+        if(optional1.isPresent()){
+            // 如果存在 ,修改
+            teachplanMediaNew = optional1.get();
+        }
+
+        // 4.新增或修改
+        teachplanMediaNew.setCourseId(teachplanMedia.getCourseId());
+        teachplanMediaNew.setMediaFileOriginalName(teachplanMedia.getMediaFileOriginalName());
+        teachplanMediaNew.setMediaId(teachplanMedia.getMediaId());
+        teachplanMediaNew.setMediaUrl(teachplanMedia.getMediaUrl());
+        teachplanMediaNew.setTeachplanId(teachplanMedia.getTeachplanId());
+        teachplanMediaRepository.save(teachplanMediaNew);
+    }
 
     /**
      * 获取根节点，如果是新课，那么根节点不存在，需要创建根节点

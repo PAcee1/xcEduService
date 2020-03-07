@@ -1,9 +1,6 @@
 package com.xuecheng.api.course;
 
-import com.xuecheng.framework.domain.course.CourseBase;
-import com.xuecheng.framework.domain.course.CourseMarket;
-import com.xuecheng.framework.domain.course.CoursePic;
-import com.xuecheng.framework.domain.course.Teachplan;
+import com.xuecheng.framework.domain.course.*;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -59,4 +56,7 @@ public interface CourseControllerApi {
 
     @ApiOperation("课程视图查询")
     CourseView findCourseView(String id);
+
+    @ApiOperation("添加课程计划绑定的视频信息")
+    ResponseResult saveTeachplanMedia(TeachplanMedia teachplanMedia);
 }
