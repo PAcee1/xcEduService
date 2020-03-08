@@ -1,5 +1,6 @@
 package com.xuecheng.manage_course.client;
 
+import com.xuecheng.framework.client.XcServiceList;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.CmsPublishPageResult;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Data: 2020/2/29 17:13
  * @Version: v1.0
  */
-@FeignClient(value = "XC-SERVICE-MANAGE-CMS")
+@FeignClient(value = XcServiceList.XC_SERVICE_MANAGE_CMS)
 public interface CmsPageClient {
 
     // 根据id查询页面，Feign远程调用
