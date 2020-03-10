@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class AuthToken {
-    String access_token;//访问token
+    String jti_token;//访问token
     String refresh_token;//刷新token
     String jwt_token;//jwt令牌
 }

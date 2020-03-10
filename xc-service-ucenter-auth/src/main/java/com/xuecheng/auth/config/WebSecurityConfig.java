@@ -16,11 +16,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Order(-1)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 配置
+     * @param web
+     * @throws Exception
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/userlogin","/userlogout","/userjwt");
-
     }
+
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -32,6 +38,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
