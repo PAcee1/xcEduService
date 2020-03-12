@@ -27,6 +27,14 @@ import java.util.Map;
 public class TestJWT {
 
     @Test
+    public void test(){
+        Map<String,Double> map = new HashMap<>();
+        map.put("A",0.0);
+        Double a = map.get("A");
+        a = 2.2;
+        System.out.println(map);
+    }
+    @Test
     public void createJWT(){
         // 秘钥库名称
         String keystoreName = "xc.keystore";

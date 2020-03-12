@@ -78,6 +78,27 @@ public class AuthService {
     }
 
     /**
+     * 根据jti 向Redis读jwt数据
+     * @param jti
+     */
+    public AuthToken getUserJwt(String jti) {
+        String key = "user_token:" + jti;
+        String json = stringRedisTemplate.opsForValue().get(key);
+        AuthToken authToken = JSON.parseObject(json, AuthToken.class);
+        return authToken;
+    }
+
+    /**
+     * 删除token
+     * @param token
+     */
+    public Boolean deleteToken(String token) {
+        String key = "user_token:" + token;
+        Boolean delete = stringRedisTemplate.delete(key);
+        return delete;
+    }
+
+    /**
      * 保存令牌到Redis中
      * @param key
      * @param content
@@ -158,9 +179,17 @@ public class AuthService {
         return authToken;
     }
 
+    /**
+     * 封装请求Header
+     * @param name
+     * @param pwd
+     * @return
+     */
     private String httpbasic(String name, String pwd) {
         String code = name + ":" + pwd;
         byte[] encode = Base64Utils.encode(code.getBytes());
         return new String(encode);
     }
+
+
 }
