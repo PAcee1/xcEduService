@@ -29,4 +29,5 @@ public class ManageCmsApplication{
     public RestTemplate restTemplate(){
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
+
 }

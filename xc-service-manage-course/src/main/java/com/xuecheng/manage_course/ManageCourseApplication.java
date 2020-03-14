@@ -1,10 +1,12 @@
 package com.xuecheng.manage_course;
 
+import com.xuecheng.framework.interceptor.FeignClientInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -23,9 +25,8 @@ public class ManageCourseApplication {
         SpringApplication.run(ManageCourseApplication.class, args);
     }
 
-    /*@Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
-    }*/
+    @Bean
+    public FeignClientInterceptor feignClientInterceptor(){
+        return new FeignClientInterceptor();
+    }
 }

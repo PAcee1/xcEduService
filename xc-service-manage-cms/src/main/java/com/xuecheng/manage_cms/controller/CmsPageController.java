@@ -8,7 +8,9 @@ import com.xuecheng.framework.domain.cms.response.CmsPublishPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.framework.web.BaseController;
 import com.xuecheng.manage_cms.service.CmsPageService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/cms/page")
-public class CmsPageController implements CmsPageControllerApi {
+public class CmsPageController extends BaseController implements CmsPageControllerApi {
 
     @Autowired
     private CmsPageService cmsPageService;
@@ -66,7 +68,9 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @PostMapping("/publishPage/{pageId}")
     public ResponseResult publishPage(@PathVariable String pageId) {
-        cmsPageService.publishPage(pageId);
+        // 获取Header中的JWT
+        String jwt = getJwtFromHeader();
+        cmsPageService.publishPage(pageId,jwt);
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
@@ -79,7 +83,22 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @PostMapping("/publishPageQuick")
     public CmsPublishPageResult publishPageQuick(@RequestBody CmsPage cmsPage) {
-        String pageUrl = cmsPageService.publishPageQuick(cmsPage);
+        // 获取Header中的JWT
+        String jwt = getJwtFromHeader();
+        String pageUrl = cmsPageService.publishPageQuick(cmsPage,jwt);
         return new CmsPublishPageResult(CommonCode.SUCCESS,pageUrl);
+    }
+
+    private String getJwtFromHeader(){
+        String authorization = request.getHeader("Authorization");
+        if(StringUtils.isEmpty(authorization)){
+            //拒绝访问
+            return null;
+        }
+        if(!authorization.startsWith("Bearer ")){
+            //拒绝访问
+            return null;
+        }
+        return authorization;
     }
 }

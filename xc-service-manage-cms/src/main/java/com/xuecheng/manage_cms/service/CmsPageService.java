@@ -31,6 +31,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -228,9 +231,9 @@ public class CmsPageService {
      * @param pageId
      * @return
      */
-    public String getPageHtml(String pageId){
+    public String getPageHtml(String pageId,String jwt){
         // 首先获取数据模型
-        Map model = getModelByPageId(pageId);
+        Map model = getModelByPageId(pageId,jwt);
         if(model == null){
             // model不存在，抛异常
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAISNULL);
@@ -254,9 +257,9 @@ public class CmsPageService {
      * 发布页面
      * @param pageId
      */
-    public void publishPage(String pageId){
+    public void publishPage(String pageId,String jwt){
         // 1、使页面静态化
-        String pageHtml = getPageHtml(pageId);
+        String pageHtml = getPageHtml(pageId,jwt);
         if(StringUtils.isEmpty(pageHtml)){
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_HTMLISNULL);
         }
@@ -278,7 +281,7 @@ public class CmsPageService {
      * @param cmsPage
      * @return
      */
-    public String publishPageQuick(CmsPage cmsPage) {
+    public String publishPageQuick(CmsPage cmsPage,String jwt) {
         /**  一、根据传来的页面信息新增或者修改  **/
         CmsPageResult cmsPageResult = save(cmsPage);
         if(!cmsPageResult.isSuccess()){
@@ -289,7 +292,7 @@ public class CmsPageService {
         String siteId = newCmsPage.getSiteId();
 
         /**  二、页面发布  **/
-        publishPage(pageId);
+        publishPage(pageId,jwt);
 
         /**  三、拼接页面的URL **/
         // 页面URL = 站点域名 + 站点WebPath + 页面WebPath + 页面名称
@@ -423,7 +426,7 @@ public class CmsPageService {
      * @param pageId
      * @return
      */
-    private Map getModelByPageId(String pageId) {
+    private Map getModelByPageId(String pageId,String jwt) {
         // 获取CmsPage
         CmsPage cmsPage = this.findById(pageId);
         if(cmsPage == null){
@@ -439,7 +442,16 @@ public class CmsPageService {
         }
 
         // 根据dataUrl获取模型
-        ResponseEntity<Map> forEntity = restTemplate.getForEntity(dataUrl, Map.class);
+        ResponseEntity<Map> forEntity = null;
+        // 如果jwt存在，拼接请求头认证
+        if(jwt != null || StringUtils.isNotEmpty(jwt)){
+            HttpHeaders header = new HttpHeaders();
+            header.set("authorization",jwt);
+            forEntity = restTemplate.exchange(dataUrl,HttpMethod.GET,
+                    new HttpEntity<>(null,header),Map.class);
+        }else {
+            forEntity = restTemplate.getForEntity(dataUrl, Map.class);
+        }
         Map body = forEntity.getBody();
         return body;
     }

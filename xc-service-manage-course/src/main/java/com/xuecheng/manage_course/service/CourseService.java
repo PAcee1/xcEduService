@@ -52,11 +52,15 @@ public class CourseService {
      * @param courseListRequest
      * @return
      */
-    public QueryResult<CourseInfo> findCourseList(int page, int size, CourseListRequest courseListRequest) {
+    public QueryResult<CourseInfo> findCourseList(int page,
+                                                  int size,
+                                                  String companyId,
+                                                  CourseListRequest courseListRequest) {
         // 设置分页
         PageHelper.startPage(page,size);
 
         // 查询列表
+        courseListRequest.setCompanyId(companyId);
         Page<CourseInfo> pageList = courseMapper.findCourseList(courseListRequest);
 
         // 封装QueryResult

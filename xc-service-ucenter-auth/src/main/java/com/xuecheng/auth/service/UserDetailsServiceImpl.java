@@ -51,23 +51,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return null;
         }
 
-        //用户权限校验
-        /*userExt.setPermissions(new ArrayList<>());
+        /**
+         * 添加用户权限
+         */
         //从数据库获取权限
         List<XcMenu> permissions = userExt.getPermissions();
+        if(permissions == null){
+            permissions = new ArrayList<>();
+        }
         List<String> user_permission = new ArrayList<>();
         permissions.forEach(item-> user_permission.add(item.getCode()));
-//        user_permission.add("course_get_baseinfo");
-//        user_permission.add("course_find_pic");
-        String user_permission_string  = StringUtils.join(user_permission.toArray(), ",");*/
-        String user_permission_string = "";
+        String user_permission_string  = StringUtils.join(user_permission.toArray(), ",");
 
         //取出正确密码（hash值）
         String password = userExt.getPassword();
         // 拼装用户信息到UserDetails
+        // 第三个参数是用户权限
         UserJwt userDetails = new UserJwt(username,
                 password,
                 AuthorityUtils.commaSeparatedStringToAuthorityList(user_permission_string));
+
+        /**
+         * 用户信息封装
+         */
         userDetails.setId(userExt.getId());
         userDetails.setUtype(userExt.getUtype());//用户类型
         userDetails.setCompanyId(userExt.getCompanyId());//所属企业

@@ -11,8 +11,11 @@ import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.framework.utils.XcOauth2Util;
+import com.xuecheng.framework.web.BaseController;
 import com.xuecheng.manage_course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/course")
-public class CourseController implements CourseControllerApi {
+public class CourseController extends BaseController implements CourseControllerApi {
 
     @Autowired
     private CourseService courseService;
@@ -45,7 +48,11 @@ public class CourseController implements CourseControllerApi {
     public QueryResponseResult<CourseInfo> findCourseList(@PathVariable int page,
                                                           @PathVariable int size,
                                                           CourseListRequest courseListRequest) {
-        QueryResult<CourseInfo> queryResult = courseService.findCourseList(page,size,courseListRequest);
+        // 先从请求头的JWT中获取id
+        XcOauth2Util oauth2Util = new XcOauth2Util();
+        XcOauth2Util.UserJwt userJwtFromHeader = oauth2Util.getUserJwtFromHeader(request);
+        String companyId = userJwtFromHeader.getCompanyId();
+        QueryResult<CourseInfo> queryResult = courseService.findCourseList(page,size,companyId,courseListRequest);
         QueryResponseResult<CourseInfo> queryResponseResult = new QueryResponseResult<>(
                 CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
@@ -91,6 +98,7 @@ public class CourseController implements CourseControllerApi {
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
+    @PreAuthorize("hasAuthority('course_find_pic')")
     @Override
     @GetMapping("/coursepic/get/{courseId}")
     public CoursePic findCoursePic(@PathVariable String courseId) {

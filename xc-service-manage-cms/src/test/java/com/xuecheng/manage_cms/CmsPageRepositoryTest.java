@@ -49,9 +49,9 @@ public class CmsPageRepositoryTest {
         System.out.println(all);
     }
 
-    @Test
+   /* @Test
     public void getPageHtml(){
         String pageHtml = cmsPageService.getPageHtml("5e4fd031392c022514c5122e");
         System.out.println(pageHtml);
-    }
+    }*/
 }
