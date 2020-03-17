@@ -94,21 +94,6 @@ CMS管理：页面增删改查，页面预览，页面发布
 
 订单服务：支付成功后自动添加选课（分布式事物）
 
-## 项目搭建启动
+## [项目搭建启动](<https://github.com/PAcee1/xcEduService/blob/master/%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md>)
 
-### 所需环境
-
-Java，Mysql，MongoDB，FastDFS
-
-MongoDB：
-
-1. xc-resources\mongodb下的xc_cms导入到db中
-2. db中创建xc_fs DataBase，不需要创建表
-
-Mysql：
-
-1. 执行xc-resources\mysql下的xc_course.sql
-
-FastDFS：
-
-具体搭建查看笔记
+## [项目开发笔记](<https://github.com/PAcee1/myNote/tree/master/%E9%A1%B9%E7%9B%AE-%E5%AD%A6%E6%88%90%E5%9C%A8%E7%BA%BF>)
