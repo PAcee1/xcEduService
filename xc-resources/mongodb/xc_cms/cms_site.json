@@ -1,1 +1,20 @@
-{ "_id" : { "$oid" : "5a751fab6abb5044e0d19ea1" }, "_class" : "com.xuecheng.framework.domain.cms.CmsSite", "siteName" : "门户主站", "siteDomain" : "http://localhost", "sitePort" : "80", "siteWebPath" : "/", "siteCreateTime" : { "$date" : "2018-02-03T02:34:19.113+0000" } }
+{ 
+    "_id" : ObjectId("5a751fab6abb5044e0d19ea1"), 
+    "_class" : "com.xuecheng.framework.domain.cms.CmsSite", 
+    "siteName" : "门户主站", 
+    "siteDomain" : "http://localhost", 
+    "sitePort" : "80", 
+    "siteWebPath" : "/", 
+    "sitePhysicalPath" : "D:/Github/xcEdu/xcEduUI/xc-ui-pc-static-portal", 
+    "siteCreateTime" : ISODate("2018-02-03T02:34:19.113+0000")
+}
+{ 
+    "_id" : ObjectId("5e5b6b8aa6a4ac40046c05ee"), 
+    "_class" : "com.xuecheng.framework.domain.cms.CmsSite", 
+    "siteName" : "课程预览站点", 
+    "siteDomain" : "http://www.xuecheng.com", 
+    "sitePort" : "80", 
+    "siteWebPath" : "", 
+    "sitePhysicalPath" : "D:/Github/xcEdu/xcEduUI/xc-ui-pc-static-resources/static", 
+    "siteCreateTime" : ISODate("2018-02-03T02:34:19.113+0000")
+}

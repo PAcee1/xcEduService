@@ -1,0 +1,147 @@
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4LsI-ABjBIAANpjz8U9TM791.JPG", 
+    "filePath" : "group1/M00/00/00/wKg4eF4LsI-ABjBIAANpjz8U9TM791.JPG", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "IMG_2060.JPG", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "businesskey" : "test", 
+    "filetag" : "filetagtest", 
+    "metadata" : {
+        "name" : "test"
+    }, 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4LszOAfOHMAANpjz8U9TM149.JPG", 
+    "filePath" : "group1/M00/00/00/wKg4eF4LszOAfOHMAANpjz8U9TM149.JPG", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "IMG_2060.JPG", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4L1MaAIkJQAABnk-yQ5Cw945.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4L1MaAIkJQAABnk-yQ5Cw945.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "gg.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4L1x2Aau9RAABVGUbq0A0491.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4L1x2Aau9RAABVGUbq0A0491.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "zzzt.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4L262AOAC7AANpjz8U9TM063.JPG", 
+    "filePath" : "group1/M00/00/00/wKg4eF4L262AOAC7AANpjz8U9TM063.JPG", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "IMG_2060.JPG", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCeOAXwPKAACWdQKHIuQ081.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCeOAXwPKAACWdQKHIuQ081.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "photo.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCe6AK0VkAABnk-yQ5Cw343.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCe6AK0VkAABnk-yQ5Cw343.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "gg.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCfeAb_4uAAG0hCBw1nI463.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCfeAb_4uAAG0hCBw1nI463.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "59a66f73N5cdd871d.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCgeAGmwBAADK7vG4KAU490.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCgeAGmwBAADK7vG4KAU490.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "lunbo3.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCg-ABSJlAAEpCKrfD5M156.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCg-ABSJlAAEpCKrfD5M156.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "lunbo4.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NChaAfEGcAAEJQvoUFYM655.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NChaAfEGcAAEJQvoUFYM655.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "lunbo1.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCh-AS3JEAAKOhlNCXxk602.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCh-AS3JEAAKOhlNCXxk602.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "lunbo2.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}
+{ 
+    "_id" : "group1/M00/00/00/wKg4eF4NCieAYKUhAAAkhCsPmks875.jpg", 
+    "filePath" : "group1/M00/00/00/wKg4eF4NCieAYKUhAAAkhCsPmks875.jpg", 
+    "fileSize" : NumberLong(0), 
+    "fileName" : "index-banner-right-top.jpg", 
+    "fileType" : "image/jpeg", 
+    "fileWidth" : NumberInt(0), 
+    "fileHeight" : NumberInt(0), 
+    "filetag" : "course", 
+    "_class" : "com.xuecheng.framework.domain.filesystem.FileSystem"
+}

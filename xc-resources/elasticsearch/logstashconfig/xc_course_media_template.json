@@ -1,0 +1,25 @@
+{
+   "mappings" : {
+      "doc" : {
+         "properties" : {
+           "courseid" : {
+               "type" : "keyword"
+            },
+            "teachplan_id" : {
+               "type" : "keyword"
+            },
+            "media_id" : {
+               "type" : "keyword"
+            },
+            "media_url" : {
+               "index" : false,
+               "type" : "text"
+            },
+            "media_fileoriginalname" : {
+               "index" : false,
+               "type" : "text"
+            }
+      }
+   },
+   "template" : "xc_course_media"
+}
